@@ -9,7 +9,6 @@ import "../styles/Home.css";
 export default function Home() {
 	const { state, dispatch } = useWeatherContext();
 
-	// Fetch Chisinau as default city on mount
 	useEffect(() => {
 		if (!state.chisinauLoaded && state.cities.length === 0) {
 			const fetchChisinau = async () => {

@@ -1,4 +1,3 @@
-// hooks/useWeather.js
 import { useWeatherContext } from "../context/useWeatherContext";
 import { fetchCityCoords, fetchCurrentWeather, fetchForecast } from "../services/weatherApi";
 
@@ -40,5 +39,5 @@ export const useWeather = () => {
   };
 
 
-  return { searchCity, getWeatherByCoords }; // 👈 export both from the hook
+  return { searchCity, getWeatherByCoords };
 };

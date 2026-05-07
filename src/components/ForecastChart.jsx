@@ -14,7 +14,6 @@ export default function ForecastChart({ forecast }) {
 		return <div>No forecast data available</div>;
 	}
 
-	// Process forecast data for chart (every 8 entries = every 24 hours for 5 days)
 	const chartData = forecast.list
 		.filter((_, index) => index % 8 === 0)
 		.map((item) => ({

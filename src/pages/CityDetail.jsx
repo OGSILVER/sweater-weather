@@ -29,19 +29,9 @@ export default function CityDetail() {
 		[state.cities, slug]
 	);
 
-	// Handle cached city data
 	useEffect(() => {
 		if (cachedCity) {
-			setWeather(cachedCity.weather);
-			setForecast(cachedCity.forecast);
 			dispatch({ type: "FETCH_SUCCESS", payload: { ...cachedCity } });
-		}
-	}, [cachedCity, dispatch]);
-
-	// Fetch if not cached
-	useEffect(() => {
-		// If city is cached, skip fetch
-		if (cachedCity) {
 			return;
 		}
 
@@ -59,7 +49,6 @@ export default function CityDetail() {
 			dispatch({ type: "FETCH_START" });
 
 			try {
-				// Fetch weather and forecast using lat/lon
 				const [currentWeather, cityForecast] = await Promise.all([
 					fetchCurrentWeather(lat, lon),
 					fetchForecast(lat, lon),
@@ -70,7 +59,6 @@ export default function CityDetail() {
 				setWeather(currentWeather);
 				setForecast(cityForecast);
 
-				// Cache the city with slug name
 				dispatch({
 					type: "ADD_CITY",
 					payload: { name: slug, lat, lon, weather: currentWeather, forecast: cityForecast }
@@ -96,7 +84,9 @@ export default function CityDetail() {
 		};
 	}, [lat, lon, cachedCity, dispatch, slug]);
 
-	const emoji = weather ? getWeatherEmoji(weather.weather[0].description) : "🌡️";
+	const displayedWeather = cachedCity?.weather ?? weather;
+	const displayedForecast = cachedCity?.forecast ?? forecast;
+	const emoji = displayedWeather ? getWeatherEmoji(displayedWeather.weather[0].description) : "🌡️";
 
 	return (
 		<div className="city-detail-container">
@@ -113,42 +103,42 @@ export default function CityDetail() {
 			{state.loading && <div className="loading">Loading weather data...</div>}
 			{state.error && <div className="error">❌ Error: {state.error}</div>}
 
-			{weather && (
+			{displayedWeather && (
 				<div className="weather-section">
 					<h2>Current Weather</h2>
 					<div className="weather-grid">
 						<div className="weather-stat">
 							<div className="weather-stat-label">Temperature</div>
-							<div className="weather-stat-value">{weather.main.temp}°C</div>
+							<div className="weather-stat-value">{displayedWeather.main.temp}°C</div>
 						</div>
 						<div className="weather-stat">
 							<div className="weather-stat-label">Feels Like</div>
-							<div className="weather-stat-value">{weather.main.feels_like}°C</div>
+							<div className="weather-stat-value">{displayedWeather.main.feels_like}°C</div>
 						</div>
 						<div className="weather-stat">
 							<div className="weather-stat-label">Humidity</div>
-							<div className="weather-stat-value">{weather.main.humidity}%</div>
+							<div className="weather-stat-value">{displayedWeather.main.humidity}%</div>
 						</div>
 						<div className="weather-stat">
 							<div className="weather-stat-label">Wind Speed</div>
-							<div className="weather-stat-value">{weather.wind.speed} m/s</div>
+							<div className="weather-stat-value">{displayedWeather.wind.speed} m/s</div>
 						</div>
 						<div className="weather-stat">
 							<div className="weather-stat-label">Pressure</div>
-							<div className="weather-stat-value">{weather.main.pressure} hPa</div>
+							<div className="weather-stat-value">{displayedWeather.main.pressure} hPa</div>
 						</div>
 						<div className="weather-stat">
 							<div className="weather-stat-label">Visibility</div>
-							<div className="weather-stat-value">{(weather.visibility / 1000).toFixed(1)} km</div>
+							<div className="weather-stat-value">{(displayedWeather.visibility / 1000).toFixed(1)} km</div>
 						</div>
 					</div>
 				</div>
 			)}
 
-			{forecast && (
+			{displayedForecast && (
 				<div className="forecast-section">
 					<h2>5-Day Forecast</h2>
-					<ForecastChart forecast={forecast} />
+					<ForecastChart forecast={displayedForecast} />
 				</div>
 			)}
 		</div>

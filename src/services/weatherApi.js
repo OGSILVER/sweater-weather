@@ -3,9 +3,6 @@ const WEATHER_URL = "https://api.openweathermap.org/data/2.5"
 const DAILY_WEATHER_URL = "https://api.openweathermap.org/data/2.5/forecast"
 const CITY_URL = "https://api.openweathermap.org/geo/1.0"
 
-//api.openweathermap.org/data/2.5/forecast/daily?lat={lat}&lon={lon}&cnt={cnt}&appid={API key}
-
-
 export async function fetchCityCoords(city) {
     const res = await fetch(`${CITY_URL}/direct?q=${city}&limit=5&appid=${API_KEY}`)
 
@@ -34,7 +31,6 @@ export async function fetchCurrentWeather(lat, lon) {
 
 
 export async function fetchForecast(lat, lon) {
-    console.log("Fetching daily forecast for:", lat, lon); // Debug log
     const res = await fetch(`${DAILY_WEATHER_URL}?units=metric&lat=${lat}&lon=${lon}&appid=${API_KEY}`)
 
     if (!res.ok) {
