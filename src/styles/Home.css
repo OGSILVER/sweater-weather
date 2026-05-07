@@ -1,0 +1,32 @@
+.home-container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 2rem 1rem;
+}
+
+.search-section {
+	margin-bottom: 3rem;
+}
+
+.saved-cities-section {
+	margin-top: 3rem;
+}
+
+.saved-cities-section h2 {
+	margin-bottom: 1.5rem;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.cities-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+	gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+	.cities-grid {
+		grid-template-columns: 1fr;
+	}
+}

@@ -1,0 +1,101 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	--primary-blue: #0080ff;
+	--cyan-accent: #00d4ff;
+	--light-bg: #f8f9fa;
+	--white: #ffffff;
+	--gray-text: #333333;
+	--gray-light: #e0e0e0;
+	--shadow: 0 2px 8px rgba(0, 128, 255, 0.1);
+	--shadow-hover: 0 4px 12px rgba(0, 128, 255, 0.2);
+}
+
+body {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+	background-color: var(--light-bg);
+	color: var(--gray-text);
+	line-height: 1.6;
+}
+
+nav {
+	background-color: var(--white);
+	padding: 1rem;
+	box-shadow: var(--shadow);
+	margin-bottom: 2rem;
+}
+
+nav a {
+	color: var(--primary-blue);
+	text-decoration: none;
+	font-weight: 600;
+	font-size: 1.1rem;
+	transition: color 0.3s ease;
+}
+
+nav a:hover {
+	color: var(--cyan-accent);
+}
+
+button {
+	padding: 0.75rem 1.25rem;
+	border: none;
+	border-radius: 8px;
+	background-color: var(--primary-blue);
+	color: var(--white);
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	font-size: 1rem;
+}
+
+button:hover {
+	background-color: var(--cyan-accent);
+	box-shadow: var(--shadow-hover);
+	transform: translateY(-2px);
+}
+
+button:active {
+	transform: translateY(0);
+}
+
+input {
+	padding: 0.75rem 1rem;
+	border: 2px solid var(--gray-light);
+	border-radius: 8px;
+	font-size: 1rem;
+	transition: all 0.3s ease;
+}
+
+input:focus {
+	outline: none;
+	border-color: var(--primary-blue);
+	box-shadow: 0 0 0 3px rgba(0, 128, 255, 0.1);
+}
+
+h1 {
+	font-size: 2.5rem;
+	margin-bottom: 1.5rem;
+	color: var(--gray-text);
+}
+
+h2 {
+	font-size: 1.75rem;
+	margin-bottom: 1rem;
+	color: var(--gray-text);
+	margin-top: 2rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	color: var(--gray-text);
+}
+
+p {
+	margin: 0.5rem 0;
+	color: var(--gray-text);
+}
